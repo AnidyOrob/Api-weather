@@ -1,0 +1,19 @@
+import requests
+import json
+
+def get_weather(city):
+    api_key = "YOUR_API_KEY"  # Подставьте ваш API-ключ от сервиса погоды
+    url = f"https://api.weatherapi.com/v1/current.json?key={api_key}&q={city}"
+    response = requests.get(url)
+    data = response.json()
+
+    if "error" in data:
+        print("Error:", data["error"]["message"])
+    else:
+        temperature = data["current"]["temp_c"]
+        condition = data["current"]["condition"]["text"]
+        print(f"Weather in {city}: {condition}, {temperature}°C")
+
+if __name__ == "__main__":
+    city = "London"
+    get_weather(city)
